@@ -1,0 +1,54 @@
+{
+  "name": "Claude Code Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-json",
+        "ms-python.python",
+        "ms-vscode.vscode-typescript-next",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "python.defaultInterpreterPath": "/usr/local/python/current/bin/python3"
+      }
+    }
+  },
+
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/codespace/.local/bin"
+  },
+
+  "mounts": [
+    "source=${localEnv:HOME}/.anthropic,target=/home/codespace/.anthropic,type=bind,consistency=cached"
+  ],
+
+  "forwardPorts": [3000, 8000, 8080],
+  
+  "portsAttributes": {
+    "3000": {
+      "label": "Web Server",
+      "onAutoForward": "notify"
+    },
+    "8000": {
+      "label": "Dev Server",
+      "onAutoForward": "silent"
+    }
+  }
+}

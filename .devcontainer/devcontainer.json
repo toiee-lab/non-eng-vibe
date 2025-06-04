@@ -1,11 +1,8 @@
 {
-  "name": "Claude Code Development Environment",
-  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  "name": "Claude Code for Web Development (Lightweight)",
+  "image": "node:18-slim",
   
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts"
-    },
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.11"
     },
@@ -19,36 +16,43 @@
     "vscode": {
       "extensions": [
         "ms-vscode.vscode-json",
+        "ms-vscode.vscode-typescript-next", 
         "ms-python.python",
-        "ms-vscode.vscode-typescript-next",
-        "GitHub.copilot",
-        "GitHub.copilot-chat"
+        "bradlc.vscode-tailwindcss",
+        "ritwickdey.liveserver",
+        "formulahendry.auto-rename-tag",
+        "ecmel.vscode-html-css"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
-        "python.defaultInterpreterPath": "/usr/local/python/current/bin/python3"
+        "python.defaultInterpreterPath": "/usr/local/bin/python3",
+        "emmet.includeLanguages": {
+          "javascript": "javascriptreact"
+        }
       }
     }
   },
 
-  "remoteEnv": {
-    "PATH": "${containerEnv:PATH}:/home/codespace/.local/bin"
-  },
-
-  "mounts": [
-    "source=${localEnv:HOME}/.anthropic,target=/home/codespace/.anthropic,type=bind,consistency=cached"
-  ],
-
-  "forwardPorts": [3000, 8000, 8080],
+  "forwardPorts": [3000, 5000, 8000],
   
   "portsAttributes": {
     "3000": {
-      "label": "Web Server",
+      "label": "Web Development Server",
       "onAutoForward": "notify"
     },
+    "5000": {
+      "label": "Python Flask Server",
+      "onAutoForward": "silent"
+    },
     "8000": {
-      "label": "Dev Server",
+      "label": "Live Server",
       "onAutoForward": "silent"
     }
-  }
+  },
+
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/node/.local/bin"
+  },
+
+  "remoteUser": "node"
 }

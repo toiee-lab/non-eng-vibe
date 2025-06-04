@@ -1,6 +1,6 @@
 # Claude Code Development Container
 
-このリポジトリは、GitHub CodespacesでClaude Codeをすぐに使い始められるように設定された開発コンテナです。 
+このテンプレート・リポジトリは、非エンジニアが、GitHub Codespaces で、 Claude Code をすぐに使い始められるように設定された軽量開発コンテナです。 
 
 *created by Claude Sonnet 4*
 
@@ -8,122 +8,156 @@
 
 ### 1. Codespacesでの起動
 
-1. このリポジトリをGitHubでフォークまたはクローン
-2. 緑色の「Code」ボタンをクリック
-3. 「Codespaces」タブを選択
-4. 「Create codespace on main」をクリック
+1. このリポジトリのページの右上の緑のボタン「Use this template」をクリック
+2. 「Create a new repository」を選択
+3. お好きな名前、簡単な説明、Public or Private (Privateがおすすめ)を選び、Codespaceを作成してください
+
+しばらく待つと、使えるようになります。
 
 ### 2. Claude Codeの認証
 
-コンテナが起動したら、ターミナルで以下を実行：
+ターミナルを開いてください。もしかしたら、「新規ターミナル」を開く必要があるかも知れません。次に、Claude Codeの設定を行います。
+
+事前に、[https://console.anthropic.com/settings/billing](https://console.anthropic.com/settings/billing) で、アカウント作成、クレジットカード登録（チャージ）を済ませておいてください。事前にログインもしておくことをおすすめします！
+
+Anthropic のアカウントがあるなら、次のコマンドを実行してください。初めての時（Anthropicにログインしていない場合）は、初期設定の後、ログインのためにAPIキー取得などの手順が示されるので、したがって、APIキーを入力してください。
 
 ```bash
-claude auth
+claude
 ```
 
-AnthropicのAPIキーを入力してください。
-
-### 3. Claude Codeの使用開始
+### 3. Claude Codeの使い方
 
 ```bash
 # インタラクティブモードで開始
 claude
 
-# チャットモードで開始
-claude chat
+# 前回の続きをする
+claude -c
+
+# 特定の会話を選んで続きをする
+claude --resume
+
+# アップデート
+claude update
 
 # ヘルプを表示
 claude --help
 ```
 
-## 📦 含まれているツール
+Claude Codeを起動した後のコマンド
 
-- **Claude Code** - Anthropicのコマンドライン開発ツール
-- **Node.js (LTS)** - JavaScript/TypeScript開発
-- **Python 3.11** - Python開発
-- **Git & GitHub CLI** - バージョン管理
-- **開発支援ツール** - jq, tree, htop など
+```bash
+# 初期化（CLAUDE.mdの作成）
+/init
 
-## 🐍 Python パッケージ
+# 使用料金をチェック
+/cost
 
-以下のPythonパッケージがプリインストールされています：
+# 会話履歴を小さく
+/compact
 
-- requests
-- beautifulsoup4
-- pandas
-- numpy
-- matplotlib
-- jupyter
-- black (コードフォーマッター)
-- flake8 (リンター)
-- pytest (テストフレームワーク)
+# 会話履歴を消す
+/clear
 
-## 📦 Node.js パッケージ
+# 設定
+/config
+```
 
-以下のNode.jsパッケージがグローバルにインストールされています：
+## 📦 含まれているツール・環境
 
-- typescript
-- ts-node
-- nodemon
-- prettier
-- eslint
+### ベース環境
+- **Node.js 18 (slim)** - メインの実行環境
+- **Python 3.11** - Python開発環境
+- **Git** - バージョン管理
+- **GitHub CLI** - GitHub操作ツール
 
-## 🎯 サンプルプロジェクト
+### VS Code拡張機能
+以下の拡張機能が自動的にインストールされます：
+- JSON言語サポート
+- TypeScript言語サポート
+- Python言語サポート
+- Tailwind CSS IntelliSense
+- Live Server
+- Auto Rename Tag
+- HTML CSS Support
 
-`~/projects/claude-code-example` にサンプルプロジェクトが作成されます。
-PythonとJavaScriptの基本的な例が含まれています。
+### ポート設定
+以下のポートが自動的に転送されます：
+- **3000番ポート** - Web Development Server（通知あり）
+- **5000番ポート** - Python Flask Server
+- **8000番ポート** - Live Server
 
-## ⚙️ カスタマイズ
+## ⚙️ 開発環境の詳細
 
-### 追加パッケージのインストール
+### エディター設定
+- デフォルトターミナル：bash
+- Python インタープリター：`/usr/local/bin/python3`
+- Emmet対応：JavaScript/React環境でHTMLスニペット使用可能
 
-Python:
+### パッケージ管理
+Node.jsプロジェクトの場合：
+```bash
+npm install package-name
+```
+
+Python プロジェクトの場合：
 ```bash
 pip install package-name
 ```
 
-Node.js:
-```bash
-npm install -g package-name
+### カスタマイズ
+
+#### 追加VS Code拡張機能の追加
+`.devcontainer/devcontainer.json` の `extensions` 配列に追加：
+```json
+"customizations": {
+  "vscode": {
+    "extensions": [
+      "existing.extension",
+      "new.extension.id"
+    ]
+  }
+}
 ```
 
-### 設定ファイルの編集
-
-- `.devcontainer/devcontainer.json` - コンテナ設定
-- `.devcontainer/setup.sh` - セットアップスクリプト
+#### 追加ポートの転送
+```json
+"forwardPorts": [3000, 5000, 8000, 9000],
+"portsAttributes": {
+  "9000": {
+    "label": "Custom Port",
+    "onAutoForward": "notify"
+  }
+}
+```
 
 ## 🔧 トラブルシューティング
 
 ### Claude Codeが見つからない場合
-
 ```bash
-export PATH="$HOME/.local/bin:$PATH"
-source ~/.bashrc
-```
-
-### APIキーの再設定
-
-```bash
-claude auth --reset
-```
-
-### セットアップスクリプトの再実行
-
-```bash
+# セットアップスクリプトを再実行
 bash .devcontainer/setup.sh
 ```
+
+### 環境の再構築
+Codespacesの場合、コンテナを再ビルドすることで環境をリセットできます：
+1. Command Palette (Ctrl+Shift+P) を開く
+2. "Codespaces: Rebuild Container" を選択
 
 ## 📚 参考リンク
 
 - [Claude Code 公式ドキュメント](https://docs.anthropic.com)
 - [Anthropic API ドキュメント](https://docs.anthropic.com)
 - [GitHub Codespaces ドキュメント](https://docs.github.com/codespaces)
+- [Dev Container 設定リファレンス](https://containers.dev/implementors/json_reference/)
 
 ## 💡 ヒント
 
 1. **効果的なプロンプト**: Claude Codeには具体的で詳細な指示を与えましょう
 2. **ステップバイステップ**: 複雑なタスクは小さなステップに分けて依頼
 3. **コンテキストの提供**: 関連するファイルや要件を明確に説明
-4. **コードレビュー**: `claude review` でコードの品質をチェック
+4. **ポート転送の活用**: 開発中のWebアプリケーションは自動転送されるポートで確認可能
+5. **拡張機能の活用**: インストール済みの VS Code 拡張機能を活用して開発効率を向上
 
 Happy coding with Claude! 🤖✨

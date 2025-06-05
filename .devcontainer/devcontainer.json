@@ -16,12 +16,16 @@
     "vscode": {
       "extensions": [
         "ms-vscode.vscode-json",
-        "ms-vscode.vscode-typescript-next", 
+        "ms-vscode.vscode-typescript-next",
         "ms-python.python",
         "bradlc.vscode-tailwindcss",
         "ritwickdey.liveserver",
         "formulahendry.auto-rename-tag",
-        "ecmel.vscode-html-css"
+        "ecmel.vscode-html-css",
+        "Anthropic.claude-code",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "vscode-icons-team.vscode-icons",
+        "GitHub.github-vscode-theme"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",

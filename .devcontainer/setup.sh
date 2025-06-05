@@ -34,7 +34,7 @@ pip3 install --user \
 
 # Create .anthropic directory
 mkdir -p ~/.anthropic
-mkdir ~/claude-tmp
+mkdir ./claude-tmp
 
 # Verify Claude Code installation
 if command -v claude &> /dev/null; then

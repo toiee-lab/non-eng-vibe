@@ -1,62 +1,94 @@
 {
   "name": "Claude Code for Web Development (Lightweight)",
-  "image": "node:18-slim",
-  
+  "image": "node:20-slim",
   "features": {
     "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.11"
+      "version": "3.11",
+      "installTools": "false"
     },
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/git:1": {
+      "ppa": "false",
+      "version": "os-provided"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "installDirectlyFromGitHubRelease": "true"
+    }
   },
-
   "postCreateCommand": "bash .devcontainer/setup.sh",
-  
   "customizations": {
     "vscode": {
       "extensions": [
+        // 必須拡張機能
         "ms-vscode.vscode-json",
         "ms-vscode.vscode-typescript-next",
         "ms-python.python",
+        "Anthropic.claude-code",
+        // Web開発支援
         "bradlc.vscode-tailwindcss",
         "ritwickdey.liveserver",
         "formulahendry.auto-rename-tag",
         "ecmel.vscode-html-css",
-        "Anthropic.claude-code",
+        "ms-vscode.vscode-css-peek",
+        // UI/UX改善
         "MS-CEINTL.vscode-language-pack-ja",
         "vscode-icons-team.vscode-icons",
-        "GitHub.github-vscode-theme"
+        "GitHub.github-vscode-theme",
+        // 初心者支援
+        "formulahendry.code-runner",
+        "ms-vscode.hexeditor"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
         "python.defaultInterpreterPath": "/usr/local/bin/python3",
+        "python.terminal.activateEnvironment": false,
         "emmet.includeLanguages": {
           "javascript": "javascriptreact"
-        }
+        },
+        "liveServer.settings.donotShowInfoMsg": true,
+        "liveServer.settings.donotVerifyTags": true,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        "editor.formatOnSave": true,
+        "editor.minimap.enabled": false,
+        "workbench.startupEditor": "readme",
+        "explorer.confirmDelete": false,
+        "explorer.confirmDragAndDrop": false
       }
     }
   },
-
-  "forwardPorts": [3000, 5000, 8000],
-  
+  "forwardPorts": [
+    3000,
+    5000,
+    8000,
+    8080
+  ],
   "portsAttributes": {
     "3000": {
-      "label": "Web Development Server",
+      "label": "React/Node.js Server",
       "onAutoForward": "notify"
     },
     "5000": {
-      "label": "Python Flask Server",
+      "label": "Python Flask/FastAPI",
       "onAutoForward": "silent"
     },
     "8000": {
       "label": "Live Server",
       "onAutoForward": "silent"
+    },
+    "8080": {
+      "label": "Alternative Server",
+      "onAutoForward": "silent"
     }
   },
-
   "remoteEnv": {
-    "PATH": "${containerEnv:PATH}:/home/node/.local/bin"
+    "PATH": "${containerEnv:PATH}:/home/node/.local/bin",
+    "NODE_ENV": "development"
   },
-
-  "remoteUser": "node"
+  "remoteUser": "node",
+  // Codespaces向け最適化
+  "mounts": [
+    "source=claude-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ],
+  "updateContentCommand": "npm install",
+  "waitFor": "postCreateCommand"
 }

@@ -1,163 +1,240 @@
 # Claude Code Development Container
 
-このテンプレート・リポジトリは、非エンジニアが、GitHub Codespaces で、 Claude Code をすぐに使い始められるように設定された軽量開発コンテナです。 
+非エンジニア向けの **Claude Code 実行環境** です。GitHub Codespaces で、ワンクリックで Claude Code を使った Web 開発・Python 開発を始められます。
 
 *created by Claude Sonnet 4*
 
-## 🚀 使い方
+## 🚀 すぐに始める
 
-### 1. Codespacesでの起動
+### 1. このテンプレートを使用
 
-1. このリポジトリのページの右上の緑のボタン「Use this template」をクリック
-2. 「Create a new repository」を選択
-3. お好きな名前、簡単な説明、Public or Private (Privateがおすすめ)を選び、Codespaceを作成してください
+1. 右上の緑のボタン **「Use this template」** をクリック
+2. **「Create a new repository」** を選択
+3. リポジトリ名と説明を入力（Private 推奨）
+4. **「Create repository」** をクリック
 
-しばらく待つと、使えるようになります。
+### 2. Codespace を起動
 
-### 2. Claude Codeの認証
+1. 作成したリポジトリのページで **「Code」** ボタンをクリック
+2. **「Codespaces」** タブを選択
+3. **「Create codespace on main」** をクリック
 
-ターミナルを開いてください。もしかしたら、「新規ターミナル」を開く必要があるかも知れません。次に、Claude Codeの設定を行います。
+数分でセットアップが完了します ⏱️
 
-事前に、[https://console.anthropic.com/settings/billing](https://console.anthropic.com/settings/billing) で、アカウント作成、クレジットカード登録（チャージ）を済ませておいてください。事前にログインもしておくことをおすすめします！
+> 💡 **ヒント**: Claude Code を本格的に使うなら、事前に **Claude Pro プラン**（月額$20）の契約をおすすめします。API利用料を気にせず開発に集中できます！
 
-Anthropic のアカウントがあるなら、次のコマンドを実行してください。初めての時（Anthropicにログインしていない場合）は、初期設定の後、ログインのためにAPIキー取得などの手順が示されるので、したがって、APIキーを入力してください。
+### 3. Claude Code を使い始める
+
+ターミナルを開いて以下を実行：
 
 ```bash
 claude
 ```
 
-### 3. Claude Codeの使い方
+初回は認証が必要です：
+1. [Anthropic Console](https://console.anthropic.com) でアカウント作成
+2. **Claude Pro プランを契約**（月額$20 - API使用料込み！）
+3. API キーを取得して入力
 
+💡 **Claude Pro がお得！** API利用料を気にせず、Claude Code を思い切り使えます
+
+## 💡 Claude Code の基本的な使い方
+
+### 初期設定
 ```bash
-# インタラクティブモードで開始
+# Claude Code を起動
 claude
 
-# 前回の続きをする
+# プロジェクトの初期化（初回のみ）
+/init
+
+# 料金使用状況を確認
+/cost
+```
+
+### よく使うコマンド
+```bash
+# 前回の会話を継続
 claude -c
 
-# 特定の会話を選んで続きをする
+# 会話履歴を選んで再開
 claude --resume
-
-# アップデート
-claude update
 
 # ヘルプを表示
 claude --help
 ```
 
-Claude Codeを起動した後のコマンド
-
+### Claude Code 内でのコマンド
 ```bash
-# 初期化（CLAUDE.mdの作成）
-/init
-
-# 使用料金をチェック
-/cost
-
-# 会話履歴を小さく
+# 会話履歴を圧縮
 /compact
 
-# 会話履歴を消す
+# 会話履歴をクリア
 /clear
 
-# 設定
+# 設定を確認・変更
 /config
 ```
 
-## 📦 含まれているツール・環境
+## 🌐 Web 開発の始め方
 
-### ベース環境
-- **Node.js 18 (slim)** - メインの実行環境
-- **Python 3.11** - Python開発環境
-- **Git** - バージョン管理
-- **GitHub CLI** - GitHub操作ツール
+### HTML/CSS/JavaScript を作成
+Claude Code に話しかけてみてください：
 
-### VS Code拡張機能
-以下の拡張機能が自動的にインストールされます：
-- JSON言語サポート
-- TypeScript言語サポート
-- Python言語サポート
+```
+「シンプルなポートフォリオサイトを作って」
+「ToDoリストのWebアプリを作って」
+「レスポンシブなランディングページを作って」
+```
+
+### Web サイトをプレビュー
+1. HTML ファイルを右クリック
+2. **「Open with Live Server」** を選択
+3. 自動でブラウザが開き、リアルタイムプレビューが可能
+
+または、ターミナルで：
+```bash
+# 現在のディレクトリをWebサーバーで配信
+npm start
+
+# ポート8000で配信
+npm run dev
+```
+
+## 🐍 Python 開発の始め方
+
+### Python プログラムを作成
+Claude Code に話しかけてみてください：
+
+```
+「Webスクレイピングのスクリプトを作って」
+「簡単なFlaskアプリを作って」
+「データ分析のPythonコードを作って」
+```
+
+### Python を実行
+```bash
+# Pythonファイルを実行
+python3 your_script.py
+
+# インタラクティブモードで起動
+python3
+```
+
+## 📂 この環境に含まれるツール
+
+### 開発言語・ランタイム
+- **Node.js 20** - JavaScript実行環境
+- **Python 3.11** - Python実行環境
+
+### Web開発ツール
+- **Live Server** - リアルタイムプレビュー付きWebサーバー
+- **http-server** - シンプルなHTTPサーバー
+- **Prettier** - コード整形ツール
+- **ESLint** - JavaScript品質チェック
+
+### Python ライブラリ
+- **requests** - HTTP通信
+- **beautifulsoup4** - Webスクレイピング
+- **flask** - Webアプリケーション開発
+- **fastapi** - 高速API開発
+- **uvicorn** - ASGIサーバー
+
+### VS Code 拡張機能
+- Claude Code 公式拡張機能
+- Live Server（Webプレビュー）
+- Python サポート
 - Tailwind CSS IntelliSense
-- Live Server
-- Auto Rename Tag
-- HTML CSS Support
+- 日本語言語パック
 
-### ポート設定
-以下のポートが自動的に転送されます：
-- **3000番ポート** - Web Development Server（通知あり）
-- **5000番ポート** - Python Flask Server
-- **8000番ポート** - Live Server
+## 🔧 カスタマイズ
 
-## ⚙️ 開発環境の詳細
-
-### エディター設定
-- デフォルトターミナル：bash
-- Python インタープリター：`/usr/local/bin/python3`
-- Emmet対応：JavaScript/React環境でHTMLスニペット使用可能
-
-### パッケージ管理
-Node.jsプロジェクトの場合：
-```bash
-npm install package-name
-```
-
-Python プロジェクトの場合：
-```bash
-pip install package-name
-```
-
-### カスタマイズ
-
-#### 追加VS Code拡張機能の追加
+### VS Code 拡張機能を追加
 `.devcontainer/devcontainer.json` の `extensions` 配列に追加：
+
 ```json
-"customizations": {
-  "vscode": {
-    "extensions": [
-      "existing.extension",
-      "new.extension.id"
-    ]
-  }
-}
+"extensions": [
+  "existing.extension",
+  "new.extension.id"
+]
 ```
 
-#### 追加ポートの転送
+### ポートを追加
 ```json
-"forwardPorts": [3000, 5000, 8000, 9000],
-"portsAttributes": {
-  "9000": {
-    "label": "Custom Port",
-    "onAutoForward": "notify"
-  }
-}
+"forwardPorts": [3000, 5000, 8000, 9000]
 ```
 
-## 🔧 トラブルシューティング
+### Python パッケージを追加
+`.devcontainer/setup.sh` の pip install 部分に追加：
 
-### Claude Codeが見つからない場合
+```bash
+pip3 install --user new-package
+```
+
+## 💰 費用について
+
+### GitHub Codespaces
+- 個人アカウント：月60時間まで無料
+- それ以降：使用時間に応じて課金
+
+### Claude API（2025年6月更新！）
+
+#### 🌟 Claude Pro プラン（推奨）
+- **月額 $20**
+- **API利用料込み** - 追加料金なし！
+- Claude Code を思い切り使えます
+- Web版 Claude も優先アクセス・高品質
+
+#### 従量課金プラン
+- 使用量に応じて課金
+- 少量使用なら安価ですが、たくさん使うとClaude Proの方がお得
+
+**💡 おすすめ**: 本格的にClaude Codeを使うなら **Claude Pro プラン** が断然お得です！
+
+## 🆘 トラブルシューティング
+
+### Claude Code が見つからない
 ```bash
 # セットアップスクリプトを再実行
 bash .devcontainer/setup.sh
 ```
 
-### 環境の再構築
-Codespacesの場合、コンテナを再ビルドすることで環境をリセットできます：
-1. Command Palette (Ctrl+Shift+P) を開く
+### 環境を最初からやり直したい
+1. VS Code のコマンドパレット（Ctrl+Shift+P）を開く
 2. "Codespaces: Rebuild Container" を選択
+
+### Live Server でプレビューできない
+1. HTML ファイルを右クリック
+2. "Open with Live Server" がない場合は、拡張機能を再インストール
 
 ## 📚 参考リンク
 
 - [Claude Code 公式ドキュメント](https://docs.anthropic.com)
 - [Anthropic API ドキュメント](https://docs.anthropic.com)
 - [GitHub Codespaces ドキュメント](https://docs.github.com/codespaces)
-- [Dev Container 設定リファレンス](https://containers.dev/implementors/json_reference/)
 
-## 💡 ヒント
+## 🎉 作成例
 
-1. **効果的なプロンプト**: Claude Codeには具体的で詳細な指示を与えましょう
-2. **ステップバイステップ**: 複雑なタスクは小さなステップに分けて依頼
-3. **コンテキストの提供**: 関連するファイルや要件を明確に説明
-4. **ポート転送の活用**: 開発中のWebアプリケーションは自動転送されるポートで確認可能
-5. **拡張機能の活用**: インストール済みの VS Code 拡張機能を活用して開発効率を向上
+Claude Code で以下のようなものを作成できます：
 
-Happy coding with Claude! 🤖✨
+### Web サイト
+- 個人ポートフォリオ
+- 企業ランディングページ
+- ブログサイト
+- オンラインレジュメ
+
+### Web アプリケーション
+- ToDoリスト
+- 計算機アプリ
+- ゲーム（じゃんけん、クイズなど）
+- データ可視化ダッシュボード
+
+### Python プログラム
+- Webスクレイピングツール
+- データ分析スクリプト
+- FlaskやFastAPIのWebアプリ
+- 自動化ツール
+
+---
+
+**Claude Code で、あなたのアイデアを形にしてみてください！** 🤖✨

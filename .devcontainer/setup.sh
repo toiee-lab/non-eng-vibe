@@ -66,7 +66,6 @@ pip3 install --user --no-warn-script-location \
 # ディレクトリ作成
 print_step "作業ディレクトリを作成中..."
 mkdir -p ~/.anthropic
-mkdir -p ./projects
 mkdir -p ./claude-tmp
 
 # 必要なディレクトリの作成

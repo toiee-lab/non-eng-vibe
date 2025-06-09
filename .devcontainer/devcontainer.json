@@ -1,15 +1,8 @@
 {
-  "name": "Claude Code for Web Development (Lightweight)",
-  "image": "node:20-slim",
+  "name": "Claude Code for Web Development (Default)",
+  // imageを削除してデフォルトを使用
   "features": {
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.11",
-      "installTools": "false"
-    },
-    "ghcr.io/devcontainers/features/git:1": {
-      "ppa": "false",
-      "version": "os-provided"
-    },
+    // 必要最小限の機能のみ
     "ghcr.io/devcontainers/features/github-cli:1": {
       "installDirectlyFromGitHubRelease": "true"
     }
@@ -18,32 +11,17 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        // 必須拡張機能
-        "ms-vscode.vscode-json",
-        "ms-vscode.vscode-typescript-next",
-        "ms-python.python",
+        // 必須拡張機能のみ
         "Anthropic.claude-code",
-        // Web開発支援
+        // Web開発支援（軽量）
         "bradlc.vscode-tailwindcss",
         "ritwickdey.liveserver",
         "formulahendry.auto-rename-tag",
-        "ecmel.vscode-html-css",
-        "ms-vscode.vscode-css-peek",
-        // UI/UX改善
+        // UI/UX改善（最小限）
         "MS-CEINTL.vscode-language-pack-ja",
-        "vscode-icons-team.vscode-icons",
-        "GitHub.github-vscode-theme",
-        // 初心者支援
-        "formulahendry.code-runner",
-        "ms-vscode.hexeditor"
+        "vscode-icons-team.vscode-icons"
       ],
       "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash",
-        "python.defaultInterpreterPath": "/usr/local/bin/python3",
-        "python.terminal.activateEnvironment": false,
-        "emmet.includeLanguages": {
-          "javascript": "javascriptreact"
-        },
         "liveServer.settings.donotShowInfoMsg": true,
         "liveServer.settings.donotVerifyTags": true,
         "files.autoSave": "afterDelay",
@@ -79,16 +57,5 @@
       "label": "Alternative Server",
       "onAutoForward": "silent"
     }
-  },
-  "remoteEnv": {
-    "PATH": "${containerEnv:PATH}:/home/node/.local/bin",
-    "NODE_ENV": "development"
-  },
-  "remoteUser": "node",
-  // Codespaces向け最適化
-  "mounts": [
-    "source=claude-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
-  ],
-  "updateContentCommand": "npm install",
-  "waitFor": "postCreateCommand"
+  }
 }
